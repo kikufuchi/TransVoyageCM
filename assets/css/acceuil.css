@@ -1,0 +1,120 @@
+@font-face {
+    font-family: 'Poppins';
+    src: url("../fonts/Poppins-Bold.ttf")format('truetype');
+}
+
+@font-face {
+    font-family: 'Poppins-ExtraLight';
+    src: url("../fonts/Poppins-ExtraLight.ttf")format('truetype');
+}
+
+
+body {
+    font-family: 'Poppins';
+    padding: 0px !important;
+}
+
+.fs-6 {
+    font-size: 19px !important;
+}
+
+header {
+    background: linear-gradient(135deg, #0B2F9F, #0a7e9e);
+    box-shadow: 0 0px 15px rgb(0, 179, 255);
+}
+
+.indice_profile {
+    height: 40px !important;
+    width: 40px !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.titleHome {
+    background: linear-gradient(145deg, rgb(1, 255, 107), rgb(216, 188, 7)) !important;
+    background-clip: text !important;
+    color: transparent !important;
+}
+
+.nav-link:hover {
+    cursor: pointer !important;
+    color: rgb(0, 255, 174) !important;
+}
+
+.mainHome {
+    min-height: 100vh;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.822)), url('../images/Bus3.png');
+    background-size: cover;
+}
+
+.main-text {
+    font-size: 85px !important;
+}
+
+.main-text div:last-child {
+    color: rgb(17, 251, 0);
+    text-shadow: 0px 0px 3px rgb(0, 255, 55);
+}
+
+.btn-info:hover {
+    box-shadow: 0px 0px 10px rgb(255, 255, 255);
+}
+
+.titleFooter {
+    font-family: 'Poppins';
+}
+
+footer {
+    font-family: 'Poppins-ExtraLight';
+    font-weight: bold !important;
+}
+
+
+
+.dropdown-menu {
+    position: absolute !important;
+    z-index: 2000;
+}
+
+.navbar {
+    overflow: visible !important;
+}
+
+
+
+/* Responsivité */
+@media (max-width:940px) {
+    .main-text {
+        padding-top: 160px !important;
+        font-size: 152% !important;
+    }
+
+    .main-text+div {
+        padding-bottom: 10px !important;
+    }
+
+    .main-text+div .btn-info a {
+        font-size: 100% !important;
+    }
+
+    .row .col-md-4 {
+        margin-bottom: 35px;
+    }
+
+    .fs-6 {
+        font-size: 14px !important;
+    }
+
+    .fs-6+ul {
+        font-size: 15px !important;
+    }
+
+    .dropdown-menu {
+        position: absolute !important;
+        top: 40px !important;
+        z-index: 2000;
+    }
+
+
+}

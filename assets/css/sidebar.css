@@ -1,0 +1,77 @@
+@font-face {
+    font-family: 'Poppins';
+    src: url("../fonts/Poppins-Bold.ttf")format('truetype');
+}
+
+@font-face {
+    font-family: 'Poppins-ExtraLight';
+    src: url("../fonts/Poppins-ExtraLight.ttf")format('truetype');
+}
+
+body {
+    font-family: 'Poppins' !important;
+}
+
+.offcanvas.offcanvas-start {
+    min-height: 100%;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.822)), url('../images/image3.jpeg');
+    background-size: cover;
+}
+
+.indice_profile {
+    height: 40px !important;
+    width: 40px !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.offcanvas-body div {
+    backdrop-filter: blur(10px) !important;
+    border: 1px solid transparent !important;
+    box-shadow: 0px 0px 15px rgb(0, 149, 255) !important;
+    transform: translateY(0px);
+    background-color: rgba(0, 149, 255, 0) !important;
+    transition: transform 0.3s ease-in, background-color 0.3s ease-in;
+}
+
+.offcanvas-body div:hover {
+    cursor: pointer;
+    background-color: rgba(0, 149, 255, 0.686) !important;
+    transform: translateY(-5px);
+}
+
+
+.nav {
+    background-image: linear-gradient(125deg, #11d4c7, #064c5cee) !important;
+}
+
+thead {
+    font-family: 'Poppins-ExtraLight' !important;
+    min-width: 710px !important;
+}
+
+/* Sur desktop, la sidebar est normale */
+@media (min-width: 790px) {
+    .offcanvas.offcanvas-start {
+        position: relative !important;
+        transform: none !important;
+        visibility: visible !important;
+        width: 280px !important;
+    }
+
+    .col-md-auto {
+        min-height: 100vh !important;
+    }
+}
+
+/* Sur mobile, comportement offcanvas par défaut */
+@media (max-width: 767px) {
+    .offcanvas.offcanvas-start {
+        width: 280px !important;
+    }
+
+    table {
+        font-size: 80%;
+    }
+}

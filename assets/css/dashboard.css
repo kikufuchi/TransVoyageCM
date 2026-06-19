@@ -1,0 +1,21 @@
+.cart {
+    background: linear-gradient(135deg, rgb(0, 119, 174), rgba(0, 255, 213, 0.664)) !important;
+    transform: translateX(0px) !important;
+    transition: transform 0.2s ease-in !important;
+}
+
+.cart:hover {
+    transform: translateY(-5px) !important;
+    box-shadow: 0px 0px 8px rgb(0, 203, 254) !important;
+}
+
+
+
+table tbody tr:nth-child(odd) {
+    background-color: rgba(207, 204, 204, 0.237) !important;
+}
+
+td{
+    padding-top: 4px !important;
+    padding-bottom: 4px !important;
+}

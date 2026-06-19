@@ -1,0 +1,56 @@
+<style>
+    /* Sur desktop, la sidebar est normale */
+    @media (min-width: 768px) {
+        .offcanvas.offcanvas-start {
+            position: relative;
+            transform: none !important;
+            visibility: visible !important;
+            width: 280px;
+        }
+    }
+
+    /* Sur mobile, comportement offcanvas par défaut */
+    @media (max-width: 767px) {
+        .offcanvas.offcanvas-start {
+            width: 280px;
+        }
+    }
+</style>
+
+<!-- Bouton burger (visible sur mobile seulement) -->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12 d-md-none p-2">
+            <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu">
+                <i class="fas fa-bars"></i> Menu
+            </button>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- Sidebar (offcanvas) -->
+        <div class="col-md-auto p-0">
+            <div class="offcanvas offcanvas-start d-md-block" tabindex="-1" id="sidebarMenu" style="width: 280px;">
+                <div class="offcanvas-header">
+                    <h5>TransVoyagesCM</h5>
+                    <button type="button" class="btn-close d-md-none" data-bs-dismiss="offcanvas"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <ul class="nav flex-column">
+                        <li><a href="dashboard.php" class="nav-link"><i class="fas fa-tachometer-alt"></i> Tableau de bord</a></li>
+                        <li><a href="gerer_trajets.php" class="nav-link"><i class="fas fa-route"></i> Gérer les trajets</a></li>
+                        <li><a href="logout.php" class="nav-link"><i class="fas fa-sign-out-alt"></i> Déconnexion</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contenu principal -->
+        <div class="col">
+            <div class="p-3">
+                <h1>Tableau de bord</h1>
+                <p>Contenu principal ici...</p>
+            </div>
+        </div>
+    </div>
+</div>
