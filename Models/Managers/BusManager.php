@@ -87,11 +87,21 @@ class BusManager extends Model
     return $result->fetchAll(PDO::FETCH_OBJ);
   }
 
-  public function findByName($nom){
+  public function findByName($nom)
+  {
     $stmt = 'SELECT id_bus FROM ' . $this->table . ' WHERE nom_bus = ? and delet = 1';
     $data = array($nom);
     $result = $this->request($stmt, $data);
-    return $result->fetch(PDO::FETCH_OBJ);      
+    return $result->fetch(PDO::FETCH_OBJ);
   }
 
+  /**
+   * Compte le nombre total de bus (non supprimés)
+   */
+  public function countAll()
+  {
+    $stmt = $this->pdo->prepare("SELECT COUNT(*) as total_bus FROM bus WHERE delet = 1");
+    $stmt->execute();
+    return $stmt->fetch(PDO::FETCH_OBJ);
+  }
 }

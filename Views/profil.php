@@ -1,7 +1,8 @@
-<?php require_once 'layouts/header.php'; ?>
+<?php 
+require_once 'layouts/header.php'; 
+?>
 
 <div class="container py-4">
-    
     <!-- En-tête profil -->
     <div class="row mb-4">
         <div class="col-lg-4"></div>

@@ -51,13 +51,14 @@ class AgenceManager extends Model
         return $result->rowCount();
     }
 
+
     public function update($id, $ville, $quartier, $nom_admin)
-    {   
+    {
         $stmt = 'select ' . $this->id_table . ' from ' . $this->table2 . ' where nom_users = ? and delet = 1';
         $data = array($nom_admin);
         $result = $this->request($stmt, $data);
         $idAdmin = $result->fetch(PDO::FETCH_OBJ)->id_users;
-        
+
         $stmt = 'UPDATE ' . $this->table . ' SET ville = ?, quartier = ?, id_admin = ? where id_agence = ?';
         $data = array(
             $ville,
@@ -67,5 +68,15 @@ class AgenceManager extends Model
         );
         $result = $this->request($stmt, $data);
         return $result->rowCount();
+    }
+
+    /**
+     * Compte le nombre total d'agences (non supprimées)
+     */
+    public function countAll()
+    {
+        $stmt = $this->pdo->prepare("SELECT COUNT(*) as total_agence FROM agence WHERE delet = 1");
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_OBJ);
     }
 }

@@ -52,7 +52,7 @@ class AuthController
                     $_SESSION['before_page'] = 'voyage';
                     header('Location:index.php?action=' . $_SESSION['before_page']);
                 } else {
-                    header('Location:' . $_SESSION['redirect']);
+                    header('Location:index.php?action=' . $_SESSION['before_page']);
                 }
                 exit();
             }
@@ -70,10 +70,12 @@ class AuthController
 
                 if (password_verify($password, $maildb->mot_de_passe)) {
                     if ($maildb->role_users == 'admin_principal') {
-                        $_SESSION['user'] = ['id_users' => $maildb->id_users,'nom' => $maildb->nom_users, 'email' => $maildb->email_users, 'role' => $maildb->role_users];
+                        $agence = $userManager->findAgencyById($maildb->id_users); 
+                        $_SESSION['user'] = ['id_users' => $maildb->id_users,'nom' => $maildb->nom_users, 'email' => $maildb->email_users, 'role' => $maildb->role_users,'agence' => 'Agence de '.$agence->quartier, 'idAgence' => $agence->id_agence];
                         require_once __DIR__ . '\..\Views\choice.php';
                     } elseif ($maildb->role_users == 'admin') {
-                        $_SESSION['user'] = ['id_users' => $maildb->id_users,'nom' => $maildb->nom_users, 'email' => $maildb->email_users, 'role' => $maildb->role_users];
+                        $agence = $userManager->findAgencyById($maildb->id_users);     
+                        $_SESSION['user'] = ['id_users' => $maildb->id_users,'nom' => $maildb->nom_users, 'email' => $maildb->email_users, 'role' => $maildb->role_users,'agence' => 'Agence de '.$agence->quartier, 'idAgence' => $agence->id_agence];
                         require_once __DIR__ . '\..\Views\choice.php';
                     } else {
                         $_SESSION['user'] = ['id_users' => $maildb->id_users,'nom' => $maildb->nom_users, 'email' => $maildb->email_users, 'role' => $maildb->role_users];

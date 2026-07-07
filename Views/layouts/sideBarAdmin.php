@@ -24,14 +24,16 @@
                 <div class="row text-end pe-2 align-items-center">
                     <div class="col-md-7 text-end mb-1 ps-3 text-white">
                         <div class="dropdown">
-                            <div class="text-white btn border-0 dropdown-toggle" data-bs-toggle="dropdown" id="dropdownProfil">Gnaban</div>
+                            <div class="ps-0 d-flex align-items-center text-white btn border-0 dropdown-toggle" data-bs-toggle="dropdown" id="dropdownProfil">
+                                <div class="indice_profile mb-1 rounded-circle me-2 bg-dark text-info text-center fs-6"><?= ucfirst($_SESSION['user']['nom'][0]);   ?></div><?= $_SESSION['user']['nom'] ?>
+                            </div>
                             <ul class="dropdown-menu dropdown-menu-dark">
-                                <li><a href="#" class="dropdown-item"><span class="fas fa-user me-2"></span> Mon profil</a></li>
-                                <li><a href="#" class="dropdown-item"><span class="fas fa-sign-out-alt"></span> Se deconnecter</a></li>
+                                <li><a href="index.php?action=profil" class="dropdown-item"><span class="fas fa-user me-2"></span> Mon profil</a></li>
+                                <li><a href="index.php?action=deconnect" class="dropdown-item"><span class="fas fa-sign-out-alt"></span> Se deconnecter</a></li>
                             </ul>
                         </div>
                     </div>
-                    <div class="col-md-5 mb-1 ps-3 text-warning">Admin</div>
+                    <div class="col-md-5 mb-1 ps-3 text-warning"><?= $_SESSION['user']['role']; ?></div>
                 </div>
             </div>
         </div>
@@ -49,15 +51,14 @@
             <div class="col-md-auto p-0 ">
                 <div class="offcanvas offcanvas-start d-md-block" id="sidebarMenu">
                     <div class="offcanvas-header">
-                        <h4 class='text-info'>Agence de Bepanda</h4>
+                        <h4 class='text-warning'><?= $_SESSION['user']['agence']; ?></h4>
                         <button type="button" class="btn-close d-md-none bg-white" data-bs-dismiss="offcanvas"></button>
                     </div>
                     <div class="offcanvas-body px-0 pb-0">
-                        <div class="py-2 ps-3 mx-2 rounded-2 mb-3"><a href="index.php?action=dashboardAdmin" class='text-decoration-none text-white'>Tableau de bord</a></div>
-                        <div class="py-2 ps-3 mx-2 rounded-2 mb-3"><a href="index.php?action=listeVoyages" class='text-decoration-none text-white'>Les voyages</a></div>
-                        <div class="py-2 ps-3 mx-2 rounded-2 mb-3"><a href="index.php?action=" class='text-decoration-none text-white'>Les Reservations</a></div>
-                        <div class="py-2 ps-3 mx-2 rounded-2 mb-3"><a href="index.php?action=" class='text-decoration-none text-white'>Les ventes</a></div>
-                        <div class="py-2 ps-3 mx-2 rounded-2 mb-3"><a href="index.php?action=listePassager" class='text-decoration-none text-white'>Les passagers</a></div>
+                        <div class="py-2 ps-3 mx-2 rounded-2 mb-3 small"><a href="index.php?action=dashboardAdmin" class='text-decoration-none text-white'>Tableau de bord</a></div>
+                        <div class="py-2 ps-3 mx-2 rounded-2 mb-3 small"><a href="index.php?action=listeVoyage" class='text-decoration-none text-white'>Les voyages</a></div>
+                        <div class="py-2 ps-3 mx-2 rounded-2 mb-3 small"><a href="index.php?action=listeReservations" class='text-decoration-none text-white'>Les Reservations</a></div>
+                        <div class="py-2 ps-3 mx-2 rounded-2 mb-3 small"><a href="index.php?action=listePassager" class='text-decoration-none text-white'>Les passagers</a></div>
                     </div>
                 </div>
             </div>

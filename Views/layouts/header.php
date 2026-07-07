@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="assets\css\acceuil.css">
     <link rel="stylesheet" href="assets\css\voyages.css">
     <link rel="stylesheet" href="\TransVoyageCM\assets\css\placeBus.css">
+    <link rel="stylesheet" href="\TransVoyageCM\assets\css\paiement.css">
     <link rel="icon" href="assets\images\Capture d’écran 2026-05-26 080655.jpg">
     <script src='tools\vendor\js\jquery.min.js'></script>
 </head>

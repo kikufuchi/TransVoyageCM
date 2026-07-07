@@ -52,9 +52,20 @@ class TrajetManager extends Model
     }
 
 
-    public function findCytyEndByCityStart($ville_depart) {
-      $stmt = 'select ville_arrivee from '.$this->table.' where ville_depart = ? ';
-      $data = array($ville_depart);
-      return $this->request($stmt,$data)->fetchAll(PDO::FETCH_OBJ);
+    public function findCytyEndByCityStart($ville_depart)
+    {
+        $stmt = 'select ville_arrivee from ' . $this->table . ' where ville_depart = ? ';
+        $data = array($ville_depart);
+        return $this->request($stmt, $data)->fetchAll(PDO::FETCH_OBJ);
+    }
+
+    /**
+     * Compte le nombre total de trajets (non supprimés)
+     */
+    public function countAll()
+    {
+        $stmt = $this->pdo->prepare("SELECT COUNT(*) as total_trajet FROM trajet WHERE delet = 1");
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_OBJ);
     }
 }

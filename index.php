@@ -51,10 +51,12 @@ $router->addRouter('creerReservation','ReservationController','insert_reservatio
 $router->addRouter('pagePaiement','ReservationController','simulationPaiement');
 $router->addRouter('confirmPaiement','ReservationController','confirmerPaiement');
 $router->addRouter('downloadTicket','ReservationController','downloadTicket');
+$router->addRouter('telechargerTickets','ReservationController','downloadPdFinalize');
+$router->addRouter('listeReservations','ReservationController','liste_reservation');
 
 $router->addRouter('pagePassager','passagerController','displayForm_passager');
 $router->addRouter('enregistrerPassagers','passagerController','save_passager');
-$router->addRouter('telechargerTickets','ReservationController','downloadPdFinalize');
+$router->addRouter('listePassager','passagerController','liste_passager');
 
 $router->addRouter('profil','ProfilController','displayProfil');
 $router->addRouter('reservationClient','ProfilController','ReservationCustumer');
@@ -72,6 +74,8 @@ if ($action == 'home') {
     require_once "Views/form/inscription.php";
 } elseif ($action == 'formConnect') {
     require_once "Views/form/connection.php";
+}elseif($action=='paie'){
+    require_once 'Views/simulerPaiement.php';
 }else {
     $router->execRoute($action);
 }

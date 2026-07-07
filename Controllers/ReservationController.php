@@ -3,6 +3,8 @@ require_once __DIR__ . '/../Models/Managers/ReservationManager.php';
 require_once __DIR__ . '/../Models/Managers/PlaceVoyageManager.php';
 require_once __DIR__ . '/../Models/Managers/VoyageManager.php';
 require_once __DIR__ . '/../Models/Managers/BusManager.php';
+require_once __DIR__ . '/../Models/Managers/AgenceManager.php';
+require_once 'AuthController.php';
 
 
 class ReservationController
@@ -11,6 +13,7 @@ class ReservationController
     private $placeVoyageManager;
     private $voyageManager;
     private $busManager;
+    private $agenceManager;
 
     public function __construct()
     {
@@ -18,9 +21,43 @@ class ReservationController
         $this->placeVoyageManager = new PlaceVoyageManager();
         $this->voyageManager = new VoyageManager();
         $this->busManager = new BusManager();
+        $this->agenceManager = new AgenceManager();
     }
 
-    public function liste_reservation() {}
+    public function liste_reservation()
+    {
+        if ($_SESSION['user']['role'] == 'admin_principal') {
+            AuthController::checkRole('admin_principal');
+
+            // Récupérer toutes les agences
+            $agences = $this->agenceManager->findAll('agence');
+
+            // Pour chaque agence, récupérer ses voyages avec détails
+            foreach ($agences as $agence) {
+                $agence->reservations = $this->reservationManager->findByAgenceWithDetails($agence->id_agence);
+                //   var_dump($agence->reservations);/
+            }
+            // die('stop');
+
+
+            ob_start();
+            require_once __DIR__ . "/../Views/gerer_reservations.php";
+            $content = ob_get_clean();
+            require_once __DIR__ . '/../Views/layouts/sideBarAdminP.php';
+        } else {
+            AuthController::checkRole('admin');
+            $agences = [];
+            $agences[] = $this->agenceManager->findByID($_SESSION['user']['idAgence'], 'agence', 'id_agence');
+
+            foreach ($agences as $agence) {
+                $agence->reservations = $this->reservationManager->findByAgenceWithDetails($agence->id_agence);
+            }
+            ob_start();
+            require_once __DIR__ . "/../Views/gerer_reservations.php";
+            $content = ob_get_clean();
+            require_once __DIR__ . '/../Views/layouts/sideBarAdmin.php';
+        }
+    }
 
     public function insert_reservation()
     {
@@ -101,7 +138,7 @@ class ReservationController
 
     function downloadTicket()
     {
-        
+
         $id_reservation = $_GET['id_reservation'] ?? null;
         $id_voyage = $_GET['id_voyage'] ?? null;
 
@@ -112,13 +149,14 @@ class ReservationController
     }
 
 
-    function downloadPdFinalize(){
+    function downloadPdFinalize()
+    {
         $id_reservation = $_GET['id_reservation'] ?? null;
         $id_voyage = $_GET['id_voyage'] ?? null;
         $voyage = $this->voyageManager->findByID($id_voyage, 'voyage', 'id_voyage');
-        $bus = $this->busManager->findByID($voyage->id_bus,"bus","id_bus");
+        $bus = $this->busManager->findByID($voyage->id_bus, "bus", "id_bus");
         $passagers = $this->reservationManager->getBypassagers($id_reservation);
 
-       require_once "Views/finaliserTelechargement.php";
+        require_once "Views/finaliserTelechargement.php";
     }
 }

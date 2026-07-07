@@ -57,7 +57,7 @@ thead {
         position: relative !important;
         transform: none !important;
         visibility: visible !important;
-        width: 280px !important;
+        width: 200px !important;
     }
 
     .col-md-auto {
@@ -68,7 +68,7 @@ thead {
 /* Sur mobile, comportement offcanvas par défaut */
 @media (max-width: 767px) {
     .offcanvas.offcanvas-start {
-        width: 280px !important;
+        width: 200px !important;
     }
 
     table {

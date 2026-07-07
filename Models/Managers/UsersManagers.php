@@ -109,4 +109,12 @@ class UsersManagers extends Model
     $result = $this->request($stmt);
     return $result->fetch(PDO::FETCH_OBJ);
   }
+
+  public function findAgencyById($id_users)
+  {
+    $stmt = "select id_agence, quartier from agence where id_admin = ? and delet = 1";
+    $data = [$id_users];
+    $result = $this->request($stmt, $data);
+    return $result->fetch(PDO::FETCH_OBJ);
+  }
 }

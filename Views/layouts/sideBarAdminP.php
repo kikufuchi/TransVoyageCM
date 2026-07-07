@@ -14,6 +14,7 @@
 </head>
 
 <body>
+    <script src="/TransVoyageCM/tools/Chart.js/chart.min.js"></script>
     <script src='/TransVoyageCM/tools/bootstrap-5.3.8/js/bootstrap.bundle.min.js' defer></script>
     <!-- Bouton burger (visible sur mobile seulement) -->
     <div class="container-fluid">
@@ -26,10 +27,10 @@
                         <div class="dropdown ">
 
                             <div class="ps-0 d-flex align-items-center text-white btn border-0 dropdown-toggle" data-bs-toggle="dropdown" id="dropdownProfil">
-                                <div class="indice_profile mb-1 rounded-circle me-2 bg-dark text-info text-center fs-6"><?= ucfirst(explode(" ", $_SESSION['user']['nom'])[0])[0]; ?></div><?= $_SESSION['user']['nom']; ?>
+                                <div class="indice_profile mb-1 rounded-circle me-2 bg-dark text-info text-center fs-6"><?= ucfirst($_SESSION['user']['nom'][0]);   ?></div><?= $_SESSION['user']['nom'] ?>
                             </div>
                             <ul class="dropdown-menu dropdown-menu-dark">
-                                <li><a href="#" class="dropdown-item"><span class="fas fa-user me-2"></span> Mon profil</a></li>
+                                <li><a href="index.php?action=profil" class="dropdown-item"><span class="fas fa-user me-2"></span> Mon profil</a></li>
                                 <li><a href="index.php?action=deconnect" class="dropdown-item"><span class="fas fa-sign-out-alt"></span> Se deconnecter</a></li>
                             </ul>
                         </div>
@@ -52,21 +53,19 @@
             <div class="col-md-auto p-0">
                 <div class="offcanvas offcanvas-start d-md-block" id="sidebarMenu">
                     <div class="offcanvas-header">
-                        <h4 class='text-info'>Agence Ndjandam</h4>
                         <button type="button" class="btn-close d-md-none bg-white" data-bs-dismiss="offcanvas"></button>
                     </div>
                     <div class="offcanvas-body px-0 pb-0">
-                        <div class="py-2 ps-3 mx-2 rounded-2 mb-3"><a href="index.php?action=dashboard" class='text-decoration-none text-white'>Tableau de bord</a></div>
-                        <div class="py-2 ps-3 mx-2 rounded-2 mb-3"><a href="index.php?action=listeTrajet" class='text-decoration-none text-white'>Trajets</a></div>
-                        <div class="py-2 ps-3 mx-2 rounded-2 mb-3"><a href="index.php?action=listeAgence" class='text-decoration-none text-white'>Agences</a></div>
-                        <div class="py-2 ps-3 mx-2 rounded-2 mb-3"><a href="index.php?action=listeUsers&role=admin" class='text-decoration-none text-white'>Admins</a></div>
-                        <div class="py-2 ps-3 mx-2 rounded-2 mb-3"><a href="index.php?action=listeUsers&role=client" class='text-decoration-none text-white'>Clients</a></div>
-                        <div class="py-2 ps-3 mx-2 rounded-2 mb-3"><a href="index.php?action=" class='text-decoration-none text-white'>Les Reservations</a></div>
-                        <div class="py-2 ps-3 mx-2 rounded-2 mb-3"><a href="index.php?action=" class='text-decoration-none text-white'>Les ventes</a></div>
-                        <div class="py-2 ps-3 mx-2 rounded-2 mb-3"><a href="index.php?action=listeBus" class='text-decoration-none text-white'>Les bus</a></div>
-                        <div class="py-2 ps-3 mx-2 rounded-2 mb-3"><a href="index.php?action=listeVoyage" class='text-decoration-none text-white'>Les voyages</a></div>
-                        <div class="py-2 ps-3 mx-2 rounded-2 mb-3"><a href="index.php?action=listeChauffeur" class='text-decoration-none text-white'>Les chauffeurs</a></div>
-                        <div class="py-2 ps-3 mx-2 rounded-2 mb-3"><a href="index.php?action=listePassager" class='text-decoration-none text-white'>Les passagers</a></div>
+                        <div class="py-2 ps-3 mx-2 rounded-2 mb-3 small"><a href="index.php?action=dashboard" class='text-decoration-none text-white'>Tableau de bord</a></div>
+                        <div class="py-2 ps-3 mx-2 rounded-2 mb-3 small"><a href="index.php?action=listeTrajet" class='text-decoration-none text-white'>Trajets</a></div>
+                        <div class="py-2 ps-3 mx-2 rounded-2 mb-3 small"><a href="index.php?action=listeAgence" class='text-decoration-none text-white'>Agences</a></div>
+                        <div class="py-2 ps-3 mx-2 rounded-2 mb-3 small"><a href="index.php?action=listeUsers&role=admin" class='text-decoration-none text-white'>Admins</a></div>
+                        <div class="py-2 ps-3 mx-2 rounded-2 mb-3 small"><a href="index.php?action=listeUsers&role=client" class='text-decoration-none text-white'>Clients</a></div>
+                        <div class="py-2 ps-3 mx-2 rounded-2 mb-3 small"><a href="index.php?action=listeReservations" class='text-decoration-none text-white'>Les Reservations</a></div>
+                        <div class="py-2 ps-3 mx-2 rounded-2 mb-3 small"><a href="index.php?action=listeBus" class='text-decoration-none text-white'>Les bus</a></div>
+                        <div class="py-2 ps-3 mx-2 rounded-2 mb-3 small"><a href="index.php?action=listeVoyage" class='text-decoration-none text-white'>Les voyages</a></div>
+                        <div class="py-2 ps-3 mx-2 rounded-2 mb-3 small"><a href="index.php?action=listeChauffeur" class='text-decoration-none text-white'>Les chauffeurs</a></div>
+                        <div class="py-2 ps-3 mx-2 rounded-2 mb-3 small"><a href="index.php?action=listePassager" class='text-decoration-none text-white'>Les passagers</a></div>
                     </div>
                 </div>
             </div>
@@ -78,7 +77,9 @@
         </div>
 
     </div>
-     
+
+    <script src="\TransVoyageCM\assets\js\displayGraphic.js"></script>
+
 </body>
 
 </html>

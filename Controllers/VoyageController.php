@@ -28,25 +28,43 @@ class VoyageController
 
     public function liste_voyage()
     {
-        AuthController::checkRole('admin_principal');
+        if ($_SESSION['user']['role'] == 'admin_principal') {
+            AuthController::checkRole('admin_principal');
 
-        // Récupérer toutes les agences
-        $agences = $this->agenceManager->findAll('agence');
+            // Récupérer toutes les agences
+            $agences = $this->agenceManager->findAll('agence');
 
-        // Pour chaque agence, récupérer ses voyages avec détails
-        foreach ($agences as $agence) {
-            $agence->voyages = $this->voyageManager->findByAgenceWithDetails($agence->id_agence);
+            // Pour chaque agence, récupérer ses voyages avec détails
+            foreach ($agences as $agence) {
+                $agence->voyages = $this->voyageManager->findByAgenceWithDetails($agence->id_agence);
+            }
+
+            // Données pour les select (modale ajout)
+            $trajets = $this->trajetManager->findAll('trajet');
+            $bus = $this->busManager->findWithPlace();
+            $chauffeurs = $this->chauffeurManager->findAll('chauffeur');
+
+            ob_start();
+            require_once __DIR__ . "/../Views/gerer_voyages.php";
+            $content = ob_get_clean();
+            require_once __DIR__ . '/../Views/layouts/sideBarAdminP.php';
+        }else{
+            AuthController::checkRole('admin');
+            $agences = [];
+            $agences[] = $this->agenceManager->findByID($_SESSION['user']['idAgence'], 'agence', 'id_agence');
+
+            foreach ($agences as $agence) {
+                $agence->voyages = $this->voyageManager->findByAgenceWithDetails($agence->id_agence);
+            }
+             // Données pour les select (modale ajout)
+            $trajets = $this->trajetManager->findAll('trajet');
+            $bus = $this->busManager->findWithPlace();
+            $chauffeurs = $this->chauffeurManager->findAll('chauffeur');
+            ob_start();
+            require_once __DIR__ . "/../Views/gerer_voyages.php";
+            $content = ob_get_clean();
+            require_once __DIR__ . '/../Views/layouts/sideBarAdmin.php';
         }
-
-        // Données pour les select (modale ajout)
-        $trajets = $this->trajetManager->findAll('trajet');
-        $bus = $this->busManager->findWithPlace();
-        $chauffeurs = $this->chauffeurManager->findAll('chauffeur');
-
-        ob_start();
-        require_once __DIR__ . "/../Views/gerer_voyages.php";
-        $content = ob_get_clean();
-        require_once __DIR__ . '/../Views/layouts/sideBarAdminP.php';
     }
 
     public function insert_voyage()
@@ -54,9 +72,9 @@ class VoyageController
         AuthController::checkRole('admin_principal');
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $this->voyageManager->nom_voyage = $_POST['trajet']; 
+            $this->voyageManager->nom_voyage = $_POST['trajet'];
             $this->voyageManager->date_depart = $_POST['date'];
-            $this->voyageManager->heure_depart = $_POST['departure']; 
+            $this->voyageManager->heure_depart = $_POST['departure'];
             $this->voyageManager->statut = $_POST['statut'];
             $this->voyageManager->categorie = $_POST['categorie'];
             $this->voyageManager->prix = $_POST['prix'];
@@ -64,11 +82,11 @@ class VoyageController
             $this->voyageManager->nom_bus = $_POST['bus'];
             $this->voyageManager->nom_chauffeur = $_POST['chauffeur'];
             $this->voyageManager->nom_agence = $_POST['agence'];
-             
+
             $id_voyage = $this->voyageManager->insert();
             $id_bus = $this->busManager->findByName($_POST['bus'])->id_bus;
-            $this->placeVoyageManager->insererPlacesPourVoyage($id_voyage,$id_bus);
-            
+            $this->placeVoyageManager->insererPlacesPourVoyage($id_voyage, $id_bus);
+
             header('Location: index.php?action=listeVoyage');
         }
     }
@@ -90,8 +108,8 @@ class VoyageController
             $this->voyageManager->nom_agence = $_POST['agence'];
 
             $id_bus = $this->busManager->findByName($_POST['bus'])->id_bus;
-            $this->placeVoyageManager->remplacerPlacesVoyage($_POST['id'],$id_bus);
-            
+            $this->placeVoyageManager->remplacerPlacesVoyage($_POST['id'], $id_bus);
+
             if ($this->voyageManager->update($_POST['id'])) {
                 header('Location: index.php?action=listeVoyage');
             } else {

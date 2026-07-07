@@ -1,0 +1,34 @@
+
+    .payment-card {
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border: 2px solid transparent !important;
+    }
+
+    .payment-card.active {
+        border-color: #28a745 !important;
+        background: linear-gradient(135deg, #f8fff9, #e8f5e9);
+    }
+
+    .payment-card .fa-chevron-right {
+        transition: all 0.3s ease;
+    }
+
+    .payment-card.active .fa-chevron-right {
+        opacity: 1 !important;
+        transform: translateX(5px);
+        color: #28a745 !important;
+    }
+
+    .phone-valid {
+        color: #28a745;
+    }
+
+    .phone-invalid {
+        color: #dc3545;
+    }
+
+    .btn-loader {
+        display: inline-flex;
+        align-items: center;
+    }
